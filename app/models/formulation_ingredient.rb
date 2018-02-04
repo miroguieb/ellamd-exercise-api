@@ -13,4 +13,5 @@ class FormulationIngredient < ApplicationRecord
   belongs_to :ingredient
 
   validates :percentage, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
+  validates :formulation_id, uniqueness: { scope: :ingredient_id }
 end

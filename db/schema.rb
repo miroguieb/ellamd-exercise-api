@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204014734) do
+ActiveRecord::Schema.define(version: 20180204040147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20180204014734) do
     t.bigint "formulation_id"
     t.bigint "ingredient_id"
     t.float "percentage"
+    t.index ["formulation_id", "ingredient_id"], name: "index_formulation_ingredients_on_ids", unique: true
     t.index ["formulation_id"], name: "index_formulation_ingredients_on_formulation_id"
     t.index ["ingredient_id"], name: "index_formulation_ingredients_on_ingredient_id"
   end
