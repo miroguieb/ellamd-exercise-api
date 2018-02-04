@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204014025) do
+ActiveRecord::Schema.define(version: 20180204014734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "formulation_ingredients", force: :cascade do |t|
+    t.bigint "formulation_id"
+    t.bigint "ingredient_id"
+    t.float "percentage"
+    t.index ["formulation_id"], name: "index_formulation_ingredients_on_formulation_id"
+    t.index ["ingredient_id"], name: "index_formulation_ingredients_on_ingredient_id"
+  end
 
   create_table "formulations", force: :cascade do |t|
     t.string "name"
@@ -31,4 +39,6 @@ ActiveRecord::Schema.define(version: 20180204014025) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "formulation_ingredients", "formulations"
+  add_foreign_key "formulation_ingredients", "ingredients"
 end
