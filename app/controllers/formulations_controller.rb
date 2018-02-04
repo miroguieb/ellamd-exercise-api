@@ -10,7 +10,7 @@ class FormulationsController < ApplicationController
 
   # GET /formulations/1
   def show
-    render json: @formulation
+    render json: @formulation, include: { formulation_ingredients: { except: :formulation_id } }
   end
 
   # POST /formulations
