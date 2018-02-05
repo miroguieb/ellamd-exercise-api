@@ -7,13 +7,13 @@ class ReportPDF < ApplicationPDF
   TABLE_ROW_COLORS       = [ "eeeeee", "ffffff" ]
   TABLE_FONT_COLOR       = "000000"
 
-  def initialize(user, ingredients)
-    @user = user
+  def initialize(patient, ingredients)
+    @patient = patient
     @ingredients = ingredients
 
-    render_header_row('Name', @user[:name])
-    render_header_row('Address', @user[:address])
-    render_header_row('Date of Birth', @user[:dob])
+    render_header_row('Name', @patient[:name])
+    render_header_row('Address', @patient[:address])
+    render_header_row('Date of Birth', @patient[:dob])
 
     render_table(['Ingredient', 'Percentage(%)'], ingredients)
 
