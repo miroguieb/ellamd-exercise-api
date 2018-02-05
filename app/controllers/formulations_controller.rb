@@ -3,14 +3,14 @@ class FormulationsController < ApplicationController
 
   # GET /formulations
   def index
-    @formulations = Formulation.all
+    @formulations = Formulation.includes(formulation_ingredients: [:ingredient]).all
 
-    render json: @formulations
+    render json: @formulations, include: { formulation_ingredients: { include: :ingredient, except: [:ingredient_id, :formulation_id] } }
   end
 
   # GET /formulations/1
   def show
-    render json: @formulation, include: { formulation_ingredients: { except: :formulation_id } }
+    render json: @formulation, include: { formulation_ingredients: { include: :ingredient, except: [:ingredient_id, :formulation_id] } }
   end
 
   # POST /formulations
@@ -41,7 +41,7 @@ class FormulationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_formulation
-      @formulation = Formulation.find(params[:id])
+      @formulation = Formulation.includes(formulation_ingredients: [:ingredient]).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
